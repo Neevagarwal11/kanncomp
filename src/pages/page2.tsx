@@ -66,14 +66,14 @@ export default function Page2(): JSX.Element {
   // Map scroll progress to opacity and translate values
   // image: y from -80 -> 0, opacity from 0 -> 1
   const imageY = useTransform(scrollYProgress, [0, 1], [-40, 30]);
-  const imageOpacity = useTransform(scrollYProgress, [0, 0.2, 1], [0, 1, 1]);
+  const imageOpacity = useTransform(scrollYProgress, [0, 0.2, 1], [0, 0.8, 1]);
 
   // paragraph: y from 80 -> 0, opacity from 0 -> 1 (starts slightly later)
   const paraY = useTransform(scrollYProgress, [0, 1], [50, -20]);
   const paraOpacity = useTransform(scrollYProgress, [0.15, 0.5, 1], [0, 1, 1]);
 
   // Smooth the transforms with a spring to emulate GSAP's scrub smoothing
-  const smoothImageY = useSpring(imageY, { stiffness: 100, damping: 30 });
+  const smoothImageY = useSpring(imageY, { stiffness: 100, damping: 20 });
   const smoothImageOpacity = useSpring(imageOpacity, { stiffness: 150, damping: 25 });
 
   const smoothParaY = useSpring(paraY, { stiffness: 200, damping: 30 });
@@ -82,29 +82,29 @@ export default function Page2(): JSX.Element {
   return (
     <section ref={ref} className="h-screen bg-[#FFFBF5]">
       {/* top header */}
-      <div className="w-full h-[10vh] flex flex-row justify-between">
-        <div className="leftside h-full w-[20vw] flex p-4 justify-center flex-row ">
+      <div className="w-full h-[10vh]  flex flex-col lg:flex-row justify-between">
+        <div className="leftside lg:h-full h-[20%] w-full justify-center lg:w-[20vw] flex p-1 lg:p-4  lg:justify-center flex-row ">
           <Dot className="animate-pulse" size={30} color="black" />
           <p>Featured</p>
         </div>
 
-        <div className="rightside gap-6 w-[60vw] h-full flex items-start justify-end pr-22 p-1 flex-row">
+        <div className="rightside gap-2 lg:gap-6 w-full lg:w-[60vw] h-[80%] lg:h-full  flex items-center justify-center lg:items-start  lg:justify-end lg:pr-22 lg:py-3 flex-row">
           <div>
-            <img src={iso} alt="ISO Certification" className="w-[3vw]" />
+            <img src={iso} alt="ISO Certification" className="lg:w-[3vw] md:w-[8vw] w-[12vw]" />
           </div>
           <div>
-            <img src={since} alt="Since 2010" className="w-[3vw] scale-220 " />
+            <img src={since} alt="Since 2010" className="w-[12vw] lg:w-[3vw] md:w-[8vw] scale-220 " />
           </div>
-          <div className="flex gap-2 p-3 font-[secondary] items-center">
-            <MapPin />
-            <p>Sri Krishna Nagar,Madhavaram</p>
+          <div className="flex gap-1 lg:gap-2  p-3 font-[secondary] items-center">
+            <MapPin className="scale-80" />
+            <p className="text-xs">Sri Krishna Nagar,Madhavaram</p>
           </div>
         </div>
       </div>
 
       {/* content */}
       <div className="w-full  flex flex-col">
-        <div className=" text-6xl flex items-center justify-center h-[30vh] font-[primary]">
+        <div className="text-4xl lg:text-6xl flex items-center justify-center h-[20vh] font-[primary]">
           Trusted by
         </div>
 
@@ -116,7 +116,7 @@ export default function Page2(): JSX.Element {
           <motion.img
             src={johnsonlogo}
             alt="Johnson logo"
-            className="johnsonimg w-[20vw] max-w-[220px] object-contain"
+            className="johnsonimg  lg:w-[20vw] max-w-[220px] object-contain"
             // subtle hover microinteraction (does not fight scroll-driven style)
             whileHover={{ scale: 1.03 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -125,7 +125,7 @@ export default function Page2(): JSX.Element {
 
         {/* PARAGRAPH: opposite direction (bottom -> up) */}
         <motion.div
-          className="clientpara px-6 max-w-3xl mx-auto will-change-transform"
+          className="clientpara px-4 lg:px-6 max-w-3xl mx-auto will-change-transform"
           style={{ y: smoothParaY, opacity: smoothParaOpacity }}
         >
           <p className="text-base text-slate-700 text-center px-8 leading-7">
