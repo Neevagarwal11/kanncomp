@@ -7,18 +7,18 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     setIsScrolled(window.scrollY > 100);
-  //   };
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 550);
+    };
 
-  //   window.addEventListener('scroll', handleScroll);
-  //   return () => window.removeEventListener('scroll', handleScroll);
-  // }, []);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  // useEffect(() => {
-  //   setIsMobileMenuOpen(false);
-  // }, [location.pathname]);
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   const navLinks = [
     { path: '/', label: 'HOME' },
@@ -31,9 +31,9 @@ export function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 nav-scroll ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 nav-scroll ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-md'
+            ? 'bg-[#FFFBF5]'
             : 'bg-transparent'
         }`}
       >
