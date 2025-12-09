@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+
+@font-face {
+  font-family: primary;
+  src: url(../Fonts/LatienneT.otf);
+}
+
+@font-face {
+  font-family: secondary;
+  src: url(../Fonts/CoFoSans-Regular-Trial.otf);
+}
+
+@font-face {
+  font-family: light;
+  src: url(../Fonts/CoFoSans-Hairline-Trial.otf);
+}
+
+
+
+/* Lenis */
+html.lenis {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
