@@ -126,7 +126,7 @@ export function Navbar(): JSX.Element {
     <>
       <nav className={navClass}>
         <div className="container-custom">
-          <div className="flex items-center justify-between h-20 p-6">
+          <div className="flex items-center justify-between h-20 lg:px-12 p-6">
             <Link to="/" className="flex items-center" aria-label="Kanncomp India Home">
               <div className="text-2xl md:text-4xl lg:text-4xl font-[secondary] font-semibold text-[#0A1A2F] tracking-tight">
                 Kanncomp India
