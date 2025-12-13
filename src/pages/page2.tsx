@@ -104,7 +104,7 @@ export default function Page2(): JSX.Element {
 
       {/* content */}
       <div className="w-full  flex flex-col">
-        <div className="text-4xl lg:text-6xl flex items-center justify-center h-[20vh] font-[primary]">
+        <div className="text-4xl lg:text-6xl uppercase flex font-medium items-center justify-center h-[20vh] font-[primary]">
           Trusted by
         </div>
 

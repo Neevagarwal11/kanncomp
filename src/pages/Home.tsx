@@ -4,6 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
 import Page3 from "./page3";
+import Page4 from './page4' 
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -65,6 +66,7 @@ export function Home() {
       <Hero/>
       <Page2/>
       <Page3/>
+      <Page4/>
  
     
     </main>

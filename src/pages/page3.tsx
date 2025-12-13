@@ -1,6 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import factory from '../assets/factory.jpg'
+import powerpress from '../assets/power press.jpg'
+import welding from '../assets/co2-welding-machine.jpg'
+import drilling from '../assets/drilling.jpg'
+import cutting from '../assets/cutting.avif'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -9,8 +14,8 @@ function Page3() {
 
   useEffect(() => {
     let ctx = gsap.context(() => {
-      const photos = gsap.utils.toArray(".photo");
-      const leftSections = gsap.utils.toArray(".left-section");
+      const photos = gsap.utils.toArray(".photo") as Element[];
+      const leftSections = gsap.utils.toArray(".left-section") as Element[];
       
       // Set initial state - IMPORTANT: Only set once, not in a loop
       gsap.set('.rightblock', {
@@ -24,7 +29,7 @@ function Page3() {
       });
 
       // Set initial position for all photos
-      photos.forEach((photo, index) => {
+      photos.forEach((photo, index) => {        
         gsap.set(photo, { 
           yPercent: index * 100,
           objectFit:"cover"
@@ -36,8 +41,8 @@ function Page3() {
         gsap.set(section, { 
           opacity: 0,
           // border:"2px solid red",
-          // yPercent: index*100 // Start from bottom
-          yPercent: 60 *index// Start from bottom
+          yPercent: index*90 // Start from bottom
+          // yPercent: 60 *index// Start from bottom
         });
       });
       // STEP 1: Pin the right block for the entire gallery
@@ -46,8 +51,16 @@ function Page3() {
         start: "top top",
         end: "bottom bottom",
         pin: ".rightblock",
-        // pinSpacing: true,
+        pinSpacing: false,
         markers: false,
+        onLeave: () => {
+          // Reset transforms when leaving to prevent zoom/shift
+          gsap.set('.rightblock', { x:"17vw" , width:"50vw"});
+        },
+        onEnterBack: () => {
+          // Reapply pin state when scrolling back
+          gsap.set('.rightblock', { x: '50vw', width: '50vw' });
+        }
       });
 
       // STEP 2: Intro animation - transition from full-width to split view
@@ -82,11 +95,10 @@ function Page3() {
       const mainTextTimeline = gsap.timeline({
         scrollTrigger: {
           trigger: ".gallery",
-          start: "25% top",
+          start: "28% top",
           end: "bottom bottom",
           scrub: 1,
-          markers: true,
-          pin:"left-section h1"
+          // markers: true,
         }
       });
 
@@ -95,33 +107,37 @@ function Page3() {
           // First text: fades out and slides up
           mainTextTimeline.to(section, {
             opacity: 0,
-            yPercent: -150,
-            duration: 0.8,
+            yPercent: 100,
+            duration: 0.5,
             // transition:'2s',
-            ease: "none"
-          }, 0.5);
+            ease: "power2.out"
+
+          }, 0);
         } else if (index < leftSections.length - 1) {
           // Middle texts: fade in and slide up, then fade out and continue sliding
           mainTextTimeline
             .to(section, {
               opacity: 1,
-              yPercent: 60,
+              yPercent: 85,
               duration:0.5,
-            }, index + 0)
+             ease: "power2.out"
+
+            },  index  - 0.2)
             .to(section, {
               opacity: 0,
-              yPercent: 60,
-              duration: 0,
-              transitionDelay:"0.1s",
-              ease:"none"
-            }, index + 1);
+              // delay:'2s',
+              yPercent: 0,
+              duration: 0.8,
+              ease: "power2.out"
+            }, index +1);
         } else {
           // Last text: only fades in and slides up
           mainTextTimeline.to(section, {
             opacity: 1,
             yPercent: 0,
             duration: 1,
-          }, index - 0.5);
+            ease: "power2.out"
+          }, index - 0.1);
         }
       });
 
@@ -164,6 +180,9 @@ function Page3() {
             yPercent: 0,
             duration: 1,
             ease: "none",
+            onComplete: () => {
+              gsap.set(photo, { xPercent:0 ,yPercent: 0 });
+            }
           }, index - 0);
         }
       });
@@ -175,36 +194,38 @@ function Page3() {
 
   const content = [
     { title: "", subtitle: "" },
-    { title: "Power Press", subtitle: "High-precision metal forming equipment" },
-    { title: "CO2 Welding", subtitle: "Advanced welding technology" },
-    { title: "Drilling Machine", subtitle: "Precision drilling solutions" },
+    { title: "Power Press", subtitle: "Our precision power press lineup—150-ton, 80-ton, and 40-ton—delivers high-force metal forming accuracy, enabling reliable fabrication of complex components with consistent strength, durability, and production efficiency." },
+    { title: "CO2 Welding", subtitle: "Our advanced CO₂ welding machines ensure clean, strong, and distortion-free joints, delivering superior weld integrity for structural steel fabrication across diverse industrial applications and demanding production environments." },
+    { title: "Drilling Machine", subtitle: "Our high-precision drilling machines provide accurate hole-making in varied steel thicknesses, supporting fast, consistent fabrication workflows and ensuring dependable alignment and structural performance in every project." },
+    { title: "Cutting Machine", subtitle: "Our high-precision drilling machines provide accurate hole-making in varied steel thicknesses, supporting fast, consistent fabrication workflows and ensuring dependable alignment and structural performance in every project." },
   ];
 
   const images = [
-    "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=1200&q=80",
-    "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80",
-    "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80",
-    "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80",
+    factory,
+    powerpress,
+    welding,
+    drilling,
+    cutting
   ];
 
   return (
     <div ref={galleryRef}>
-      <div className="gallery flex overflow-hidden">
-        <div className="left w-0 relative bg-gray-50 pt-[10vh]">
+      <div className="gallery flex overflow-hidden gap-0">
+        <div className="left w-0 relative bg-[#FFFBF5] pt-[10vh]">
           {content.map((item, index) => (
             <div
               key={index}
-              className="left-section h-screen flex flex-col justify-center items-center px-12"
+              className="left-section h-screen flex flex-col pl-6 justify-center items-start gap-10"
             >
-              <h1 className="text-5xl font-bold text-gray-900 mb-4">
+              <h1 className="text-8xl font-[primary] uppercase text-[#0A1A2F] mb-4">
                 {item.title}
               </h1>
-              <p className="text-xl text-gray-600">{item.subtitle}</p>
+              <p className="font-[light] max-w-[30vw] text-md px-3 text-[#352E2E]">{item.subtitle}</p>
             </div>
           ))}
         </div>
 
-        <div className="rightblock overflow-hidden w-full h-screen relative overflow-hidden">
+        <div className="rightblock overflow-hidden w-full h-screen relative will-change-transform">
           {images.map((src, index) => (
             <div
               key={index}
