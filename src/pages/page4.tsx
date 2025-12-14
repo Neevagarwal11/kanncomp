@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import Aboutusimg from '../components/aboutus'
 import { Dot } from "lucide-react";
-import gsap from 'gsap';
 
 function page4() {
 
