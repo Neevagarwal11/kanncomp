@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import office from '../assets/Office.jpg'
 import factoryint from '../assets/factoryint.jpg'
 import factoryshed from '../assets/factoryshed.jpg'
+import office2 from '../assets/office2.jpg'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -27,7 +28,8 @@ function Page4() {
   const images = [
     office,
     factoryint,
-    factoryshed
+    factoryshed,
+    office2
   ];
 
   // ScrollTrigger parallax reveal animation - overlay slides up to reveal carousel

@@ -15,6 +15,11 @@
   font-family: light;
   src: url(../Fonts/CoFoSans-Hairline-Trial.otf);
 }
+@font-face {
+  font-family: medium;
+  src: url(../Fonts/CoFoSans-Thin-Trial.otf);
+}
+
 
 
 

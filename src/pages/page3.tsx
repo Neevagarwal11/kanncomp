@@ -1,12 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import factory from '../assets/factory.jpg'
 import powerpress from '../assets/power press.jpg'
 import welding from '../assets/co2-welding-machine.jpg'
 import drilling from '../assets/drilling.jpg'
 import cutting from '../assets/cutting.avif'
-
+import factoryext from '../assets/factoryshed.jpg'
 gsap.registerPlugin(ScrollTrigger);
 
 function Page3() {
@@ -118,26 +117,26 @@ function Page3() {
           mainTextTimeline
             .to(section, {
               opacity: 1,
-              yPercent: 85,
-              duration:0.5,
+              yPercent: 88,
+              duration:0.3,
              ease: "power2.out"
 
-            },  index  - 0.2)
+            },  index  - 0.5)
             .to(section, {
-              opacity: 0,
+              opacity: 1,
               // delay:'2s',
               yPercent: 0,
-              duration: 0.8,
+              duration:1,
               ease: "power2.out"
-            }, index +1);
+            }, index + 0.8);
         } else {
           // Last text: only fades in and slides up
           mainTextTimeline.to(section, {
             opacity: 1,
             yPercent: 0,
-            duration: 1,
-            ease: "power2.out"
-          }, index - 0.1);
+            duration: 0.5,
+            ease: "power2.inOut"
+          }, index - 0);
         }
       });
 
@@ -201,7 +200,7 @@ function Page3() {
   ];
 
   const images = [
-    factory,
+    factoryext,
     powerpress,
     welding,
     drilling,
