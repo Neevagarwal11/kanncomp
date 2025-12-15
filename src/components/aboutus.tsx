@@ -7,6 +7,7 @@ import factoryint from '../assets/factoryint.jpg'
 import factoryshed from '../assets/factoryshed.jpg'
 import office2 from '../assets/office2.jpg'
 
+
 gsap.registerPlugin(ScrollTrigger);
 
 function Page4() {
@@ -14,17 +15,20 @@ function Page4() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLeftHalf, setIsLeftHalf] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const [direction, setDirection] = useState('next'); // Track slide direction
+  const [direction, setDirection] = useState('next');
+  const [isDesktop, setIsDesktop] = useState(false);
   
   // Refs for DOM elements and animations
   const carouselRef = useRef(null);
   const cursorRef = useRef(null);
   const autoPlayTimerRef = useRef(null);
-  const isAnimatingRef = useRef(false); // Prevent multiple clicks during animation
+  const isAnimatingRef = useRef(false);
   const mainContainerRef = useRef(null);
   const revealOverlayRef = useRef(null);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
 
-  // Image data - Same images as provided
+  // Image data
   const images = [
     office,
     factoryint,
@@ -32,31 +36,44 @@ function Page4() {
     office2
   ];
 
-  // ScrollTrigger parallax reveal animation - overlay slides up to reveal carousel
+  // Detect if device is desktop (non-touch) and screen size
   useEffect(() => {
+    const checkDesktop = () => {
+      const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isLargeScreen = window.innerWidth >= 1024; // lg breakpoint
+      setIsDesktop(!hasTouch && isLargeScreen);
+    };
+
+    checkDesktop();
+    window.addEventListener('resize', checkDesktop);
+
+    return () => window.removeEventListener('resize', checkDesktop);
+  }, []);
+
+  // ScrollTrigger reveal animation - ONLY for desktop
+  useEffect(() => {
+    if (!isDesktop) return;
+
     const ctx = gsap.context(() => {
-      // Set initial state - overlay covers the carousel completely
       gsap.set(revealOverlayRef.current, {
-        yPercent: 0, // Starts covering the carousel
+        yPercent: 0,
       });
 
-      // Create ScrollTrigger that slides the overlay up
       gsap.to(revealOverlayRef.current, {
-        yPercent: -100, // Slides up completely, revealing carousel
-        duration:5,
-        ease:"power2.out",
+        yPercent: -100,
+        duration: 5,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: mainContainerRef.current,
-          start: "top 70%", // Start when section enters viewport
-          scrub:1,
-          end: "top 110%", // End when section reaches top
-        //   markers: true,
+          start: "top 70%",
+          scrub: 1,
+          end: "top 10%",
         }
       });
     }, mainContainerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isDesktop]);
 
   // Navigate to previous image
   const goToPrevious = () => {
@@ -76,8 +93,9 @@ function Page4() {
     );
   };
 
-  // Handle click based on cursor position
+  // Handle click - ONLY for desktop
   const handleClick = () => {
+    if (!isDesktop) return;
     if (isLeftHalf) {
       goToPrevious();
     } else {
@@ -85,8 +103,10 @@ function Page4() {
     }
   };
 
-  // Track mouse position to determine left/right half
+  // Track mouse position - ONLY for desktop
   const handleMouseMove = (e) => {
+    if (!isDesktop) return;
+    
     const carousel = carouselRef.current;
     if (!carousel) return;
 
@@ -104,8 +124,10 @@ function Page4() {
     });
   };
 
-  // Show custom cursor on mouse enter
+  // Show custom cursor - ONLY for desktop
   const handleMouseEnter = () => {
+    if (!isDesktop) return;
+    
     gsap.to(cursorRef.current, {
       scale: 1,
       opacity: 1,
@@ -115,8 +137,10 @@ function Page4() {
     setIsPaused(true);
   };
 
-  // Hide custom cursor on mouse leave
+  // Hide custom cursor - ONLY for desktop
   const handleMouseLeave = () => {
+    if (!isDesktop) return;
+    
     gsap.to(cursorRef.current, {
       scale: 0,
       opacity: 0,
@@ -126,7 +150,31 @@ function Page4() {
     setIsPaused(false);
   };
 
-  // Auto-play functionality - changes image every 5 seconds
+  // Touch handlers for mobile swipe
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const swipeDistance = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 50;
+
+    if (Math.abs(swipeDistance) > minSwipeDistance) {
+      if (swipeDistance > 0) {
+        // Swiped left - go to next
+        goToNext();
+      } else {
+        // Swiped right - go to previous
+        goToPrevious();
+      }
+    }
+  };
+
+  // Auto-play functionality
   useEffect(() => {
     if (!isPaused) {
       autoPlayTimerRef.current = setInterval(() => {
@@ -141,7 +189,7 @@ function Page4() {
     };
   }, [isPaused, currentIndex]);
 
-  // Animate image transitions with slide effect based on direction
+  // Animate image transitions
   useEffect(() => {
     const imageElements = document.querySelectorAll('.carousel-image');
     const currentImage = imageElements[currentIndex];
@@ -216,19 +264,22 @@ function Page4() {
   return (
     <div 
       ref={mainContainerRef}
-      className="maincontainer w-full min-h-screen bg-[#FFFBF5] flex flex-col items-center justify-center overflow-hidden relative"
+      className="maincontainer w-full lg:min-h-[105vh] min-h-[65vh] bg-[#FFFBF5] flex flex-col items-center justify-between overflow-hidden relative"
     >
-      {/* Carousel container - stays in place */}
-      <div className="relative w-full">
+      {/* Carousel container */}
+      <div className="relative w-full lg:h-screen h-[60vh] ">
         <div 
           ref={carouselRef}
-          className="relative w-full h-screen cursor-none overflow-hidden"
+          className={`relative w-full h-full overflow-hidden ${isDesktop ? 'cursor-none' : ''}`}
           onMouseMove={handleMouseMove}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onClick={handleClick}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
-          {/* Image stack - all images positioned absolutely */}
+          {/* Image stack */}
           {images.map((src, index) => (
             <div
               key={index}
@@ -243,36 +294,42 @@ function Page4() {
             </div>
           ))}
 
-          {/* Custom cursor that follows mouse */}
-          <div
-            ref={cursorRef}
-            className="fixed pointer-events-none z-50 -translate-x-1/2 -translate-y-1/2"
-            style={{ 
-              scale: 0, 
-              opacity: 0,
-              top: 0,
-              left: 0
-            }}
-          >
-            <div className="bg-white rounded-full p-4 shadow-2xl">
-              {isLeftHalf ? (
-                <ChevronLeft className="w-8 h-8 text-gray-900" />
-              ) : (
-                <ChevronRight className="w-8 h-8 text-gray-900" />
-              )}
+          {/* Custom cursor - ONLY shown on desktop */}
+          {isDesktop && (
+            <div
+              ref={cursorRef}
+              className="fixed pointer-events-none z-50 -translate-x-1/2 -translate-y-1/2"
+              style={{ 
+                scale: 0, 
+                opacity: 0,
+                top: 0,
+                left: 0
+              }}
+            >
+              <div className="bg-white rounded-full p-3 md:p-4 shadow-2xl">
+                {isLeftHalf ? (
+                  <ChevronLeft className="w-6 h-6 md:w-8 md:h-8 text-gray-900" />
+                ) : (
+                  <ChevronRight className="w-6 h-6 md:w-8 md:h-8 text-gray-900" />
+                )}
+              </div>
             </div>
-          </div>
+          )}
+
+         
         </div>
 
-        {/* Reveal overlay - slides up to reveal the carousel underneath */}
-        <div 
-          ref={revealOverlayRef}
-          className="absolute inset-0 w-full h-full bg-[#FFFBF5] pointer-events-none z-10"
-          style={{ transformOrigin: 'top' }}
-        />
+        {/* Reveal overlay - ONLY for desktop */}
+        {isDesktop && (
+          <div 
+            ref={revealOverlayRef}
+            className="absolute inset-0 w-full h-full bg-[#FFFBF5] pointer-events-none z-10"
+            style={{ transformOrigin: 'top' }}
+          />
+        )}
 
         {/* Image counter positioned outside carousel at bottom */}
-        <div className="relative bg-[#FFFBF5] justify-between px-2 w-full flex text-[#544D4D] text-sm item-center font-bold py-4">
+        <div className="relative  bg-[#FFFBF5] justify-between px-2 w-full flex text-[#544D4D] text-sm item-center font-bold py-4">
           <div className='font-[light]'>
             <h5>Kanncomp India Pvt Ltd.</h5>
           </div>
@@ -282,6 +339,13 @@ function Page4() {
             <span> / {String(images.length).padStart(2, '0')}</span>
           </div>
         </div>
+
+        {/* Swipe indicator for mobile - shows on first load */}
+        {!isDesktop && currentIndex === 0 && (
+          <div className="absolute bottom-20 left-1/2 -translate-x-1/2 text-white bg-black/50 px-4 py-2 rounded-full text-sm animate-pulse">
+            ← Swipe to navigate →
+          </div>
+        )}
       </div>
     </div>
   );

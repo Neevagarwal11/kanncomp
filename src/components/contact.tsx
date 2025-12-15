@@ -38,12 +38,12 @@ function Contact() {
   }, []);
 
   return (
-    <div className="contact-container h-[60vh] w-full flex flex-col px-12">
+    <div className="contact-container h-[60vh] w-full flex flex-col px-6 lg:px-12">
       <div
         ref={boxRef}
-        className="getintouch cursor-pointer border-t-1 border-t-[#352E2E] border-b-[#352E2E] flex  flex-row justify-between border-b-1 h-[15vh]"
+        className="getintouch cursor-pointer border-t-1 border-t-[#352E2E] border-b-[#352E2E] flex  flex-row justify-between border-b-1 h-[10vh] lg:h-[15vh]"
       >
-        <div className="text text-4xl font-[primary] uppercase flex h-full items-center">
+        <div className="text text-2xl lg:text-4xl font-[primary] uppercase flex h-full items-center">
           <h2>Get Your project On The Boards</h2>
         </div>
 
@@ -69,9 +69,10 @@ function Contact() {
         </div>
       </div>
 
-      <div className="contact-container text-[#352E2E] p-12 flex flex-row w-full h-full">
-        <div className=" w-[20vw]">
-          <div className=" flex flex-col gap-6">
+      <div className="contact-container text-[#352E2E] py-4  lg:p-12 grid grid-cols-2 lg:flex flex-col lg:flex-row w-full h-full">
+
+        <div className=" order-3 lg:order-1 ">
+          <div className=" flex flex-col gap-4 px-0 lg:px-4  lg:gap-6">
             <h5 className="font-[medium] uppercase text-sm">Sanjeev Agarwal</h5>
 
             <div className="flex text-sm flex-row font-[light] items-center gap-2">
@@ -120,8 +121,8 @@ function Contact() {
           </div>
         </div>
 
-        <div className="w-[20vw] ">
-          <div className=" flex flex-col gap-6 text-[#2a2525]">
+        <div className=" lg:order-2 ">
+          <div className=" flex flex-col gap-4 px-0 lg:px-4 lg:gap-6 text-[#2a2525]">
             <h5 className="uppercase font-[medium] text-sm">
               General INQUIRES
             </h5>
@@ -135,14 +136,14 @@ function Contact() {
               </p>
             </a>
 
-            <div className="address font-[light] w-[90%] text-sm">
+            <div className="address font-[light] w-[40vw] lg:w-[20vw] text-sm">
               Old No. 38, New No. 52, Sri Krishna Nagar, 2nd Extention,
               Madhavaram, Chennai - 600060
             </div>
           </div>
         </div>
 
-        <div className="w-20vw">
+        <div className=" order-2 w-[40vw] h-[20vh] lg:h-[30vh]  lg:w-[20vw] lg:order-3">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3884.913059157677!2d80.222005!3d13.167881500000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a526604a2d8738f%3A0x6898f4c861b168cc!2sKannith!5e0!3m2!1sen!2sin!4v1765815577832!5m2!1sen!2sin"
             width="100%"
@@ -152,6 +153,7 @@ function Contact() {
             referrerpolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
+
       </div>
     </div>
   );
