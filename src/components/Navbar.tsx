@@ -145,18 +145,20 @@ export function Navbar(): JSX.Element {
             </Link>
 
             {/* Desktop links (same as earlier) */}
-            <div className="hidden lg:flex items-center space-x-10">
+            <div className="hidden lg:flex items-center uppercase space-x-10">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   onClick={()=>{
                     if(link.path === '/'){
                       window.scrollTo({top:0 , behavior:"instant"})
+                    }else{
+                      window.scrollTo({top:0})
                     }
                     
                   }}
                   to={link.path}
-                  className={`text-sm font-sans uppercase font-medium tracking-wide transition-colors duration-200 ${location.pathname === link.path ? "text-primary-900" : "text-primary-700 hover:text-primary-900"
+                  className={`text-sm font-bold uppercase font-[medium] tracking-wide transition-colors duration-200 ${location.pathname === '/contact' ? "text-[#FFFBF5]" : "text-primary-700 hover:text-primary-900"
                     }`}
                 >
                   {link.label}
@@ -231,14 +233,14 @@ export function Navbar(): JSX.Element {
               exit="exit"
             >
               <div className="w-full h-full flex flex-col items-center justify-center">
-                <motion.ul className="flex flex-col items-center gap-8 text-center">
+                <motion.ul className="flex flex-col uppercase items-center gap-8 text-center">
                   {navLinks.map((link, i) => (
                     <motion.li key={link.path} variants={linkVariants} className="w-full">
                       <Link
                         ref={i === 0 ? firstLinkRef : undefined}
                         to={link.path}
                         onClick={() => setOpen(false)}
-                        className="block w-full text-[#FFFBF5] font-[primary] text-[3.2rem] sm:text-[3.8rem] md:text-[4.6rem] lg:text-[5.6rem] font-light leading-tight"
+                        className="block w-full text-[#FFFBF5] font-[primary] text-[2.5rem] sm:text-[3.8rem] md:text-[4.6rem] lg:text-[5.6rem] font-light leading-tight"
                         style={{ WebkitTapHighlightColor: "transparent" }}
                       >
                         {link.label}

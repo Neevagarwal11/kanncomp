@@ -3,6 +3,7 @@ import { Navbar } from './components/Navbar'
 import { Home } from './pages/Home'
 import Infra  from './pages/Infra' 
 import useLenis from './hooks/useLenis'
+import Contact from './pages/contact'
 
 function App() {
   useLenis()
@@ -14,6 +15,7 @@ function App() {
         <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/infrastructure" element={<Infra />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
 
       
