@@ -10,7 +10,15 @@ export function Navbar(): JSX.Element {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-  const getThreshold = () => (window.innerWidth <= 768 ? 450 : 500);
+
+  const getThreshold = () => {
+    if(location.pathname === '/'){
+      return window.innerWidth <= 768 ? (window.innerWidth + 190) : 550
+    }else{
+      return window.innerWidth <= 768 ? (window.innerWidth - 350) : 100
+    }
+  }
+  
 
   const handleScroll = () => {
     const threshold = getThreshold();
@@ -21,11 +29,12 @@ export function Navbar(): JSX.Element {
   window.addEventListener("scroll", handleScroll, { passive: true });
   window.addEventListener("resize", handleScroll); // Update threshold on resize
 
+ 
   return () => {
     window.removeEventListener("scroll", handleScroll);
     window.removeEventListener("resize", handleScroll);
   };
-}, []);
+}, [location.pathname]);
   // menu open state (replaces previous isMobileMenuOpen)
   const [open, setOpen] = useState(false);
 
@@ -38,8 +47,8 @@ export function Navbar(): JSX.Element {
 
   const navLinks = [
     { path: "/", label: "HOME" },
-    { path: "/our-work", label: "MACHINERY" },
-    { path: "/gallery", label: "GALLERY" },
+    { path: "/infrastructure", label: "Infrastructure" },
+    { path: "/gallery", label: "GALLERY"},
     { path: "/about", label: "ABOUT" },
     { path: "/contact", label: "CONTACT" },
   ];
@@ -127,7 +136,9 @@ export function Navbar(): JSX.Element {
       <nav className={navClass}>
         <div className="container-custom">
           <div className="flex items-center justify-between h-20 lg:px-12 p-6">
-            <Link to="/" className="flex items-center" aria-label="Kanncomp India Home">
+            <Link
+            onClick={() => window.scrollTo({top:0, behavior:"instant"})} 
+             to="/" className="flex items-center" aria-label="Kanncomp India Home">
               <div className="text-2xl md:text-4xl lg:text-4xl font-[secondary] font-semibold text-[#0A1A2F] tracking-tight">
                 Kanncomp India
               </div>
@@ -138,8 +149,14 @@ export function Navbar(): JSX.Element {
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
+                  onClick={()=>{
+                    if(link.path === '/'){
+                      window.scrollTo({top:0 , behavior:"instant"})
+                    }
+                    
+                  }}
                   to={link.path}
-                  className={`text-sm font-sans font-medium tracking-wide transition-colors duration-200 ${location.pathname === link.path ? "text-primary-900" : "text-primary-700 hover:text-primary-900"
+                  className={`text-sm font-sans uppercase font-medium tracking-wide transition-colors duration-200 ${location.pathname === link.path ? "text-primary-900" : "text-primary-700 hover:text-primary-900"
                     }`}
                 >
                   {link.label}

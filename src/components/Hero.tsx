@@ -23,12 +23,12 @@ export function Hero() {
             </p>
           </div>
           <div className="flex flex-row lg:flex-row mr-2 p-2 xs:text-sm lg:p-4 font-[light] sm:flex-row gap-4 slide-up items-center justify-center delay-300">
-            <Link to="/our-work" className="btn-primary border-2  transition-all duration-500 ease-in-out rounded-full px-4 py-2 lg:py-2 border-[#EAECED]  text-[#EAECED] hover:bg-[#EAECED] hover:text-[#014E7A] text-center">
+            <Link to="/our-work" className="btn-primary  border-1 transition-all duration-500 ease-in-out rounded-full px-4 py-2 lg:py-2 border-[#EAECED]  text-[#EAECED] hover:bg-[#EAECED] hover:text-[#014E7A] text-center">
               EXPLORE PROJECTS
             </Link>
             <Link
               to="/contact"
-              className="btn-secondary  border-2  rounded-full px-4 py-2 border-[#EAECED] transition-all duration-500 ease-in-out text-[#EAECED] hover:bg-[#EAECED] hover:text-[#014E7A] text-center"
+              className="btn-secondary    rounded-full px-4 py-2 border-1 border-[#EAECED] transition-all duration-500 ease-in-out text-[#EAECED] hover:bg-[#EAECED] hover:text-[#014E7A] text-center"
             >
               LET'S TALK
             </Link>
