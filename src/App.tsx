@@ -4,6 +4,7 @@ import { Home } from './pages/Home'
 import Infra  from './pages/Infra' 
 import useLenis from './hooks/useLenis'
 import Contact from './pages/contact'
+import About from './pages/about'
 
 function App() {
   useLenis()
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/infrastructure" element={<Infra />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
       </Routes>
 
       

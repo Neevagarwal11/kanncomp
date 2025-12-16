@@ -12,7 +12,7 @@ export function Navbar(): JSX.Element {
   useEffect(() => {
 
   const getThreshold = () => {
-    if(location.pathname === '/'){
+    if(location.pathname === '/' || location.pathname === '/about'){
       return window.innerWidth <= 768 ? (window.innerWidth + 190) : 550
     }else{
       return window.innerWidth <= 768 ? (window.innerWidth - 350) : 100
