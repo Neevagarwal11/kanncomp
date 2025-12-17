@@ -331,15 +331,15 @@ const topLine = {
                       key={link.path} 
                       variants={linkVariants}
                     >
-                      <a
+                      <Link
                         ref={i === 0 ? firstLinkRef : undefined}
-                        href={link.path}
+                        to={link.path}
                         onClick={() => setOpen(false)}
                         className="block text-[#0A1A2F] font-[primary] text-[2.5rem] sm:text-[3.8rem] md:text-[4.6rem] uppercase leading-tight tracking-tight hover:opacity-60 transition-opacity"
                         style={{ WebkitTapHighlightColor: "transparent" }}
                       >
                         {link.label}
-                      </a>
+                      </Link>
                     </motion.li>
                   ))}
                 </motion.ul>

@@ -11,7 +11,7 @@ export function Hero() {
         }}
       />
 
-      <div className="hero-content relative z-10 container-custom xs:-bottom-32 -bottom-52 lg:-bottom-26 w-[90vw]  text-[#FFFBF5]">
+      <div className="hero-content relative z-10 container-custom -bottom-32 lg:-bottom-26 w-[90vw]  text-[#FFFBF5]">
         <h1 className="text-hero font-[primary] text-4xl  lg:text-8xl mb-6 slide-up">
           Forging Tomorrow’s,
           <br /> Steel Structures
