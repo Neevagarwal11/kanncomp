@@ -48,8 +48,7 @@ export function Navbar(): JSX.Element {
   const navLinks = [
     { path: "/", label: "HOME" },
     { path: "/infrastructure", label: "Infrastructure" },
-    { path: "/gallery", label: "GALLERY"},
-    { path: "/about", label: "ABOUT" },
+    { path: "/about", label: "ABOUT US" },
     { path: "/contact", label: "CONTACT" },
   ];
 

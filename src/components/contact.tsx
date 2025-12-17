@@ -1,8 +1,9 @@
 import React, { useRef, useEffect } from "react";
-import { ArrowRight } from "lucide-react";
 import gsap from "gsap";
+import { useNavigate } from "react-router-dom";
 
 function Contact() {
+  const navigate = useNavigate();
   const boxRef = useRef<HTMLDivElement>(null);
   const itemRef = useRef<HTMLDivElement>(null);
 
@@ -41,6 +42,7 @@ function Contact() {
     <div className="contact-container h-[60vh] w-full flex flex-col px-6 lg:px-12">
       <div
         ref={boxRef}
+        onClick={() => navigate('/contact')}
         className="getintouch cursor-pointer border-t-1 border-t-[#352E2E] border-b-[#352E2E] flex  flex-row justify-between border-b-1 h-[10vh] lg:h-[15vh]"
       >
         <div className="text text-2xl lg:text-4xl font-[primary] uppercase flex h-full items-center">
