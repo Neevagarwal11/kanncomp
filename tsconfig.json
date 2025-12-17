@@ -8,6 +8,8 @@
     "moduleResolution": "bundler",
     "module": "ESNext",
     "target": "ESNext",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "jsx": "react-jsx"
   }
 }
