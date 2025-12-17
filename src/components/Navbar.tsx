@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState, type JSX } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence, type Variants, useReducedMotion } from "framer-motion";
+import kci from '../assets/kcilogo.png'
 
 export function Navbar(): JSX.Element {
   const location = useLocation();
@@ -10,7 +11,14 @@ export function Navbar(): JSX.Element {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant", // use "smooth" if you want
+    });
+  }, [location.pathname]);
 
+  useEffect(() => {
   const getThreshold = () => {
     if(location.pathname === '/' || location.pathname === '/about'){
       return window.innerWidth <= 768 ? (window.innerWidth + 190) : 550
@@ -28,7 +36,6 @@ export function Navbar(): JSX.Element {
   handleScroll(); // Run once on mount
   window.addEventListener("scroll", handleScroll, { passive: true });
   window.addEventListener("resize", handleScroll); // Update threshold on resize
-
  
   return () => {
     window.removeEventListener("scroll", handleScroll);
@@ -85,18 +92,112 @@ export function Navbar(): JSX.Element {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  // --- Motion Variants (compact & slick) --------------------------------
-  const topLine: Variants = {
-    closed: { y: -6, rotate: 0, width: "20px" },
-    open: { y: 0, rotate: 45, width: "20px", transition: { duration: 0.28, ease: [0.2, 0.9, 0.2, 0.95] } },
+
+    // =====================================================
+  // ANIMATION VARIANTS - PREMIUM Mobile PANEL SYSTEM
+  // =====================================================
+
+
+   const panelContainerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.05,
+      },
+    },
+    exit: {
+      transition: {
+        staggerChildren: 0.06,
+        staggerDirection: -1, // Reverse stagger on exit
+      },
+    },
   };
-  const middleLine: Variants = {
+
+  // Individual panel animation
+  const panelVariants = {
+    hidden: {
+      y: "-100%",
+      transition: {
+        duration: 0.6,
+        ease: [0.76, 0, 0.24, 1], // Premium cubic-bezier
+      },
+    },
+    visible: {
+      y: "0%",
+      transition: {
+        duration: 0.7,
+        ease: [0.76, 0, 0.24, 1],
+      },
+    },
+    exit: {
+      y: "-100%",
+      transition: {
+        duration: 0.5,
+        ease: [0.76, 0, 0.24, 1],
+      },
+    },
+  };
+
+  
+
+  // Content container (appears after panels)
+  const contentContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delay: 0.4, // Wait for panels to settle
+        staggerChildren: 0.08,
+        delayChildren: 0.05,
+      },
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: 0.2,
+      },
+    },
+  };
+
+  // Individual link animation
+  const linkVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 20,
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: [0.22, 1, 0.36, 1], // Smooth, confident ease
+      },
+    },
+  };
+
+  // Hamburger animation
+const topLine = {
+    closed: { y: -6, rotate: 0, width: "20px" },
+    open: { 
+      y: 0, 
+      rotate: 45, 
+      width: "20px", 
+      transition: { duration: 0.28, ease: [0.2, 0.9, 0.2, 0.95] } 
+    },
+  };
+  const middleLine = {
     closed: { opacity: 1, scaleX: 1 },
     open: { opacity: 0, scaleX: 0.6, transition: { duration: 0.18 } },
   };
-  const bottomLine: Variants = {
+  const bottomLine = {
     closed: { y: 6, rotate: 0, width: "20px" },
-    open: { y: 0, rotate: -45, width: "20px", transition: { duration: 0.28, ease: [0.2, 0.9, 0.2, 0.95] } },
+    open: { 
+      y: 0, 
+      rotate: -45, 
+      width: "20px", 
+      transition: { duration: 0.28, ease: [0.2, 0.9, 0.2, 0.95] } 
+    },
   };
 
   const overlayVariants: Variants = {
@@ -105,25 +206,7 @@ export function Navbar(): JSX.Element {
     exit: { opacity: 0, transition: { duration: 0.18 } },
   };
 
-  const panelVariants: Variants = {
-    hidden: { opacity: 0, scale: 0.98 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        when: "beforeChildren",
-        staggerChildren: 0.07,
-        duration: 0.36,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
-    exit: { opacity: 0, scale: 0.98, transition: { duration: 0.22 } },
-  };
-
-  const linkVariants: Variants = {
-    hidden: { opacity: 0, y: 18 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
-  };
+ 
   // -----------------------------------------------------------------------
 
   // keep nav background animation from previous code
@@ -152,9 +235,8 @@ export function Navbar(): JSX.Element {
                     if(link.path === '/'){
                       window.scrollTo({top:0 , behavior:"instant"})
                     }else{
-                      window.scrollTo({top:0})
+                      window.scrollTo({top:0 , behavior:"smooth"})
                     }
-                    
                   }}
                   to={link.path}
                   className={`text-sm font-bold uppercase font-[medium] tracking-wide transition-colors duration-200 ${location.pathname === '/contact' ? "text-[#FFFBF5]" : "text-primary-700 hover:text-primary-900"
@@ -201,55 +283,69 @@ export function Navbar(): JSX.Element {
       </nav>
 
       {/* Fullscreen mobile menu (integrated, retains backdrop & behavior) */}
-      <AnimatePresence initial={false} mode="wait">
+     <AnimatePresence mode="wait">
         {open && (
-          <>
-            {/* backdrop (lower z so nav/hamburger remains clickable when needed) */}
-            {!prefersReducedMotion ? (
+          <motion.div
+            key="mobile-menu"
+            className="fixed inset-0 z-40 lg:hidden"
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            {/* Three Vertical Panels */}
+            <motion.div
+              className="absolute inset-0 flex"
+              variants={panelContainerVariants}
+            >
+              {/* Panel 1 */}
               <motion.div
-                key="backdrop"
-                className="fixed inset-0 z-40 bg-black/55 backdrop-blur-md"
-                onClick={() => setOpen(false)}
-                variants={overlayVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
+                variants={panelVariants}
+                className="w-1/3 h-full bg-[#FFFBF5]"
               />
-            ) : (
-              <div key="backdrop-static" className="fixed inset-0 z-40 bg-black/55" onClick={() => setOpen(false)} />
-            )}
+              
+              {/* Panel 2 */}
+              <motion.div
+                variants={panelVariants}
+                className="w-1/3 h-full bg-[#FFFBF5]"
+              />
+              
+              {/* Panel 3 */}
+              <motion.div
+                variants={panelVariants}
+                className="w-1/3 h-full bg-[#FFFBF5]"
+              />
+            </motion.div>
 
-            {/* centered panel with big links */}
+            {/* Content Layer (on top of panels) */}
             <motion.aside
-              key="panel"
+              ref={panelRef}
               role="dialog"
               aria-modal="true"
-              ref={panelRef}
-              className="fixed inset-0 z-40 flex items-center justify-center p-6"
-              variants={panelVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
+              className="absolute inset-0 flex items-center px-8 md:px-12"
+              variants={contentContainerVariants}
             >
-              <div className="w-full h-full flex flex-col items-center justify-center">
-                <motion.ul className="flex flex-col uppercase items-center gap-8 text-center">
+              <motion.nav className="w-full">
+                <motion.ul className="space-y-6">
                   {navLinks.map((link, i) => (
-                    <motion.li key={link.path} variants={linkVariants} className="w-full">
-                      <Link
+                    <motion.li 
+                      key={link.path} 
+                      variants={linkVariants}
+                    >
+                      <a
                         ref={i === 0 ? firstLinkRef : undefined}
-                        to={link.path}
+                        href={link.path}
                         onClick={() => setOpen(false)}
-                        className="block w-full text-[#FFFBF5] font-[primary] text-[2.5rem] sm:text-[3.8rem] md:text-[4.6rem] lg:text-[5.6rem] font-light leading-tight"
+                        className="block text-[#0A1A2F] font-[primary] text-[2.5rem] sm:text-[3.8rem] md:text-[4.6rem] uppercase leading-tight tracking-tight hover:opacity-60 transition-opacity"
                         style={{ WebkitTapHighlightColor: "transparent" }}
                       >
                         {link.label}
-                      </Link>
+                      </a>
                     </motion.li>
                   ))}
                 </motion.ul>
-              </div>
+              </motion.nav>
             </motion.aside>
-          </>
+          </motion.div>
         )}
       </AnimatePresence>
     </>
