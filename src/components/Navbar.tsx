@@ -1,5 +1,5 @@
 // src/components/Navbar.tsx
-import React, { useEffect, useRef, useState, type JSX } from "react";
+import { useEffect, useRef, useState, type JSX } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence, type Variants, useReducedMotion } from "framer-motion";
 import kci from '../assets/kcilogo.png'

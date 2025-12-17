@@ -1,5 +1,5 @@
 // src/pages/page2.tsx
-import React, { useRef, type JSX } from "react";
+import { useRef, type JSX } from "react";
 import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
 import { Dot, MapPin } from "lucide-react";
 import iso from "../assets/iso-removebg-preview.png";

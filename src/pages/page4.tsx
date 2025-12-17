@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import Aboutusimg from '../components/aboutus'
 import { Dot } from "lucide-react";
 

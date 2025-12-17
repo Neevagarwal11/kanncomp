@@ -10,6 +10,8 @@
     "target": "ESNext",
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "noImplicitAny": false,
+    "strict": false
   }
 }

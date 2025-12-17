@@ -1,4 +1,3 @@
-import React from 'react'
 import kci from '../assets/kcilogo.png'
 
 function abouthero() {

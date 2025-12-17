@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import  { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import powerpress from '../assets/power press.jpg'
@@ -10,7 +10,7 @@ import factoryext from '../assets/factoryshed.jpg'
 gsap.registerPlugin(ScrollTrigger);
 
 function Page3() {
-  const galleryRef = useRef(null);
+const galleryRef = useRef<HTMLDivElement | null>(null);
   const [isMobile, setIsMobile] = useState(false);
 
   // Detect screen size and update isMobile state
@@ -30,8 +30,8 @@ function Page3() {
     if (isMobile) return;
 
     let ctx = gsap.context(() => {
-      const photos = gsap.utils.toArray(".photo");
-      const leftSections = gsap.utils.toArray(".left-section");
+const photos = gsap.utils.toArray<HTMLElement>(".photo");
+const leftSections = gsap.utils.toArray<HTMLElement>(".left-section");
       
       // Set initial state - IMPORTANT: Only set once, not in a loop
       gsap.set('.rightblock', {

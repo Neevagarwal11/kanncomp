@@ -1,4 +1,3 @@
-import React from "react";
 import powerpress from "../assets/power press.jpg";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";

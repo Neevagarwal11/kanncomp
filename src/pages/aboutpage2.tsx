@@ -1,5 +1,5 @@
 // src/pages/page2.tsx
-import React, { useRef, type JSX } from "react";
+import { useRef, type JSX } from "react";
 import { useScroll, useReducedMotion, useTransform, useSpring } from "framer-motion";
 import Aboutusimg from '../components/aboutus'
 import Page4 from "../pages/page4";

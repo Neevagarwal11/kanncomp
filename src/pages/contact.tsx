@@ -1,4 +1,3 @@
-import React from "react";
 import cabin from "../assets/cabin.jpg";
 
 function contact() {
