@@ -30,10 +30,10 @@ export default function Page2(): JSX.Element {
 
           <div className="rightside gap-6 w-[60vw] h-full flex items-start justify-end pr-22 p-1 flex-row">
             <div>
-              <img src={iso} alt="ISO Certification" className="w-[3vw]" />
+              <img src={iso} loading="lazy" alt="ISO Certification" className="w-[3vw]" />
             </div>
             <div>
-              <img src={since} alt="Since 2010" className="w-[3vw] scale-220 " />
+              <img src={since} loading="lazy" alt="Since 2010" className="w-[3vw] scale-220 " />
             </div>
             <div className="flex gap-2 p-3 font-[secondary] items-center">
               <MapPin />
@@ -82,7 +82,7 @@ export default function Page2(): JSX.Element {
   return (
     <section ref={ref} className="h-screen bg-[#FFFBF5]">
       {/* top header */}
-      <div className="w-full h-[10vh]  flex flex-col lg:flex-row justify-between">
+      <div className="w-full h-[10vh]  flex flex-col gap-2 lg:flex-row justify-between">
         <div className="leftside lg:h-full h-[20%] w-full justify-center lg:w-[20vw] flex p-1 lg:p-4  lg:justify-center flex-row ">
           <Dot className="animate-pulse" size={30} color="black" />
           <p>Featured</p>

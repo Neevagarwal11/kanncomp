@@ -289,6 +289,7 @@ function Page4() {
               <img
                 src={src}
                 alt={`Slide ${index + 1}`}
+                loading='lazy'
                 className="w-full h-full object-cover"
               />
             </div>

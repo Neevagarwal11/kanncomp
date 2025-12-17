@@ -51,7 +51,7 @@ function Infra() {
       <div className="machine-container  text-[#352E2E] flex w-full  flex-col lg:flex-row p-4 lg:p-10 gap-8">
 
         <div className="img-container lg:h-[80vh] h-[40vh] w-[100%] lg:w-[40vw]  overflow-hidden rounded-sm">
-          <img src={powerpress} alt="" className="w-full hover:scale-108 duration:20 transition-all ease:[power.in]  h-full object-cover" />
+          <img src={powerpress} alt="" loading="lazy" className="w-full hover:scale-108 duration:20 transition-all ease:[power.in]  h-full object-cover" />
         </div>
 
         <div className="specs-contaier flex flex-col w-full lg:w-[50vw] p-4 gap-8">
@@ -101,7 +101,7 @@ function Infra() {
       <div className="machine-container  text-[#352E2E] flex w-full lg:flex-row-reverse  flex-col p-4 lg:p-10 gap-8">
 
         <div className="img-container lg:h-[80vh] h-[40vh] w-[100%] lg:w-[40vw]  overflow-hidden rounded-sm">
-          <img src={drilling} alt="" className="w-full hover:scale-120 duration:20 transition-all ease:[power.in]  h-full object-center scale-108" />
+          <img src={drilling} loading="lazy" alt="" className="w-full hover:scale-120 duration:20 transition-all ease:[power.in]  h-full object-center scale-108" />
         </div>
 
         <div className="specs-contaier flex flex-col w-full lg:w-[50vw] p-4 gap-8">
@@ -151,7 +151,7 @@ function Infra() {
       <div className="machine-container  text-[#352E2E] flex w-full  flex-col lg:flex-row p-4 lg:p-10 gap-8">
 
         <div className="img-container lg:h-[80vh] h-[40vh] w-[100%] lg:w-[40vw]  overflow-hidden rounded-sm">
-          <img src={welding} alt="" className="w-full hover:scale-108 duration:20 transition-all ease:[power.in]  h-full object-center" />
+          <img src={welding} alt="" loading="lazy" className="w-full hover:scale-108 duration:20 transition-all ease:[power.in]  h-full object-center" />
         </div>
 
         <div className="specs-contaier  flex flex-col w-full lg:w-[50vw] p-4 gap-12">

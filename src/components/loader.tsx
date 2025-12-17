@@ -65,6 +65,7 @@ const CircularLoader: React.FC<{ progress: number }> = ({ progress }) => {
     <div className="absolute inset-0 flex items-center justify-center">
       <img
         ref={circleImgRef}
+        loading="lazy"
         src={loader} // your circular image
         alt="Kanncomp Loader"
         className="w-[170px] h-[170px] object-contain"
@@ -298,7 +299,7 @@ const Loader: React.FC<LoaderProps> = ({
           {/* Logo placeholder - replace with actual SVG logo */}
           <div className="w-16 h-16 bg-white/10 rounded-sm flex items-center justify-center">
             <div className="text-[#3B2E34] text-2xl font-bold">
-              <img src={kci} alt="" />
+              <img src={kci} alt="" loading="lazy"/>
             </div>
           </div>
         </div>

@@ -218,6 +218,7 @@ const leftSections = gsap.utils.toArray<HTMLElement>(".left-section");
                 <img
                   src={images[index]}
                   alt={item.title}
+                  loading="lazy"
                   className="w-[95%] rounded-md h-full object-cover"
                 />
               </div>
@@ -266,6 +267,7 @@ const leftSections = gsap.utils.toArray<HTMLElement>(".left-section");
                 src={src}
                 alt={content[index]?.title || "Image"}
                 className=" w-full h-full object-cover"
+                loading="lazy"
               />
             </div>
           ))}

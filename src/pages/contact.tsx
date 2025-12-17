@@ -13,6 +13,7 @@ function contact() {
         <img
           src={cabin}
           alt=""
+          loading="lazy"
           className="w-full h-full object-cover mix-blend-overlay"
         />
       </div>

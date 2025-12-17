@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export function Hero() {
   return (
-    <section className="hero-section relative h-[92vh] flex items-center justify-center overflow-hidden">
+    <section className="hero-section relative h-[90vh] lg:h-[92vh] flex items-center justify-center overflow-hidden">
       <div
         className="hero-bg absolute inset-0 bg-cover bg-center"
         style={{
@@ -11,7 +11,7 @@ export function Hero() {
         }}
       />
 
-      <div className="hero-content relative z-10 container-custom -bottom-32 lg:-bottom-26 w-[90vw]  text-[#FFFBF5]">
+      <div className="hero-content relative z-10 container-custom -bottom-24 lg:-bottom-26 w-[90vw]  text-[#FFFBF5]">
         <h1 className="text-hero font-[primary] text-4xl  lg:text-8xl mb-6 slide-up">
           Forging Tomorrow’s,
           <br /> Steel Structures
