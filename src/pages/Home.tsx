@@ -6,6 +6,9 @@ import { useEffect, useRef } from "react";
 import Page3 from "./page3";
 import Page4 from './page4' 
 import Page5 from './page5'
+import productReveal from '../components/productReveal'
+
+import Page2next from "./page2next";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -66,7 +69,8 @@ export function Home() {
     <main  ref={containerRef as any} className="bg-[#FFFBF5]">
       <Hero/>
       <Page2/>
-      <Page3/>
+      <Page2next/>
+      {/* <Page3/> */}
       <Page4/>
       <Page5/>
     

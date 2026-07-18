@@ -1,8 +1,13 @@
 // src/components/Navbar.tsx
 import { useEffect, useRef, useState, type JSX } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { motion, AnimatePresence, type Variants, useReducedMotion } from "framer-motion";
-import kci from '../assets/kcilogo.png'
+import {
+  motion,
+  AnimatePresence,
+  type Variants,
+  useReducedMotion,
+} from "framer-motion";
+import kci from "../assets/kcilogo.png";
 
 export function Navbar(): JSX.Element {
   const location = useLocation();
@@ -19,29 +24,28 @@ export function Navbar(): JSX.Element {
   }, [location.pathname]);
 
   useEffect(() => {
-  const getThreshold = () => {
-    if(location.pathname === '/' || location.pathname === '/about'){
-      return window.innerWidth <= 768 ? (window.innerWidth + 190) : 550
-    }else{
-      return window.innerWidth <= 768 ? (window.innerWidth - 350) : 100
-    }
-  }
-  
+    const getThreshold = () => {
+      if (location.pathname === "/" || location.pathname === "/about") {
+        return window.innerWidth <= 768 ? window.innerWidth + 190 : 550;
+      } else {
+        return window.innerWidth <= 768 ? window.innerWidth - 350 : 100;
+      }
+    };
 
-  const handleScroll = () => {
-    const threshold = getThreshold();
-    setIsScrolled(window.scrollY > threshold);
-  };
+    const handleScroll = () => {
+      const threshold = getThreshold();
+      setIsScrolled(window.scrollY > threshold);
+    };
 
-  handleScroll(); // Run once on mount
-  window.addEventListener("scroll", handleScroll, { passive: true });
-  window.addEventListener("resize", handleScroll); // Update threshold on resize
- 
-  return () => {
-    window.removeEventListener("scroll", handleScroll);
-    window.removeEventListener("resize", handleScroll);
-  };
-}, [location.pathname]);
+    handleScroll(); // Run once on mount
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll); // Update threshold on resize
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, [location.pathname]);
   // menu open state (replaces previous isMobileMenuOpen)
   const [open, setOpen] = useState(false);
 
@@ -54,7 +58,8 @@ export function Navbar(): JSX.Element {
 
   const navLinks = [
     { path: "/", label: "HOME" },
-    { path: "/infrastructure", label: "Infrastructure" },
+    { path: "/infrastructure", label: "Machinery" },
+    { path: "/products", label: "PRODUCTS" },
     { path: "/about", label: "ABOUT US" },
     { path: "/contact", label: "CONTACT" },
   ];
@@ -76,15 +81,20 @@ export function Navbar(): JSX.Element {
       if (e.key === "Tab") {
         const panel = panelRef.current;
         if (!panel) return;
-        const focusables = Array.from(panel.querySelectorAll<HTMLElement>(
-          'a, button, [tabindex]:not([tabindex="-1"])'
-        ));
+        const focusables = Array.from(
+          panel.querySelectorAll<HTMLElement>(
+            'a, button, [tabindex]:not([tabindex="-1"])',
+          ),
+        );
         if (focusables.length === 0) return;
-        const first = focusables[0], last = focusables[focusables.length - 1];
+        const first = focusables[0],
+          last = focusables[focusables.length - 1];
         if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault(); last.focus();
+          e.preventDefault();
+          last.focus();
         } else if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault(); first.focus();
+          e.preventDefault();
+          first.focus();
         }
       }
     };
@@ -92,13 +102,11 @@ export function Navbar(): JSX.Element {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-
-    // =====================================================
+  // =====================================================
   // ANIMATION VARIANTS - PREMIUM Mobile PANEL SYSTEM
   // =====================================================
 
-
-   const panelContainerVariants = {
+  const panelContainerVariants = {
     hidden: {},
     visible: {
       transition: {
@@ -139,8 +147,6 @@ export function Navbar(): JSX.Element {
     },
   };
 
-  
-
   // Content container (appears after panels)
   const contentContainerVariants = {
     hidden: { opacity: 0 },
@@ -162,12 +168,12 @@ export function Navbar(): JSX.Element {
 
   // Individual link animation
   const linkVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       y: 20,
     },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: {
         duration: 0.5,
@@ -177,13 +183,13 @@ export function Navbar(): JSX.Element {
   };
 
   // Hamburger animation
-const topLine = {
+  const topLine = {
     closed: { y: -6, rotate: 0, width: "20px" },
-    open: { 
-      y: 0, 
-      rotate: 45, 
-      width: "20px", 
-      transition: { duration: 0.28, ease: [0.2, 0.9, 0.2, 0.95] } 
+    open: {
+      y: 0,
+      rotate: 45,
+      width: "20px",
+      transition: { duration: 0.28, ease: [0.2, 0.9, 0.2, 0.95] },
     },
   };
   const middleLine = {
@@ -192,11 +198,11 @@ const topLine = {
   };
   const bottomLine = {
     closed: { y: 6, rotate: 0, width: "20px" },
-    open: { 
-      y: 0, 
-      rotate: -45, 
-      width: "20px", 
-      transition: { duration: 0.28, ease: [0.2, 0.9, 0.2, 0.95] } 
+    open: {
+      y: 0,
+      rotate: -45,
+      width: "20px",
+      transition: { duration: 0.28, ease: [0.2, 0.9, 0.2, 0.95] },
     },
   };
 
@@ -206,12 +212,12 @@ const topLine = {
     exit: { opacity: 0, transition: { duration: 0.18 } },
   };
 
- 
   // -----------------------------------------------------------------------
 
   // keep nav background animation from previous code
-  const navClass = `fixed top-0 left-0 right-0 z-50 transition-all duration-500 nav-scroll ${isScrolled ? "bg-[#FFFBF5]" : "bg-transparent"
-    }`;
+  const navClass = `fixed top-0 left-0 right-0 z-50 transition-all duration-500 nav-scroll ${
+    isScrolled ? "bg-[#FFFBF5]" : "bg-transparent "
+  }`;
 
   return (
     <>
@@ -219,9 +225,21 @@ const topLine = {
         <div className="container-custom">
           <div className="flex items-center justify-between h-20 lg:px-12 p-6">
             <Link
-            onClick={() => window.scrollTo({top:0, behavior:"instant"})} 
-             to="/" className="flex items-center" aria-label="Kanncomp India Home">
-              <div className="text-2xl md:text-4xl lg:text-4xl font-[secondary] font-semibold text-[#0A1A2F] tracking-tight">
+              onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
+              to="/"
+              className="flex items-center"
+              aria-label="Kanncomp India Home"
+            >
+              <div
+                className={`text-2xl md:text-4xl lg:text-4xl font-[secondary] font-semibold tracking-tight transition-colors duration-500 ${
+                  location.pathname === "/infrastructure" ||
+                  location.pathname === "/products"
+                    ? "text-[#0A1A2F]"
+                    : isScrolled
+                      ? "!text-[#0A1A2F]"
+                      : "!text-[#FFFBF5]"
+                }`}
+              >
                 Kanncomp India
               </div>
             </Link>
@@ -231,16 +249,24 @@ const topLine = {
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
-                  onClick={()=>{
-                    if(link.path === '/'){
-                      window.scrollTo({top:0 , behavior:"instant"})
-                    }else{
-                      window.scrollTo({top:0 , behavior:"smooth"})
+                  onClick={() => {
+                    if (link.path === "/") {
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    } else {
+                      window.scrollTo({ top: 0, behavior: "smooth" });
                     }
                   }}
                   to={link.path}
-                  className={`text-sm font-bold uppercase font-[medium] tracking-wide transition-colors duration-200 ${location.pathname === '/contact' ? "text-[#FFFBF5]" : "text-primary-700 hover:text-primary-900"
-                    }`}
+                  className={`text-sm font-bold uppercase font-[medium] tracking-wide transition-colors duration-200 ${
+                    location.pathname === link.path
+                      ? "text-[#C04000]"
+                      : isScrolled
+                        ? "text-[#0A1A2F]"
+                        : location.pathname === "/infrastructure" ||
+                            location.pathname === "/products"
+                          ? "text-[#0A1A2F]"
+                          : "text-[#FFFBF5] hover:text-[#FFFBF5]/80"
+                  }`}
                 >
                   {link.label}
                 </Link>
@@ -283,7 +309,7 @@ const topLine = {
       </nav>
 
       {/* Fullscreen mobile menu (integrated, retains backdrop & behavior) */}
-     <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait">
         {open && (
           <motion.div
             key="mobile-menu"
@@ -302,13 +328,13 @@ const topLine = {
                 variants={panelVariants}
                 className="w-1/3 h-full bg-[#FFFBF5]"
               />
-              
+
               {/* Panel 2 */}
               <motion.div
                 variants={panelVariants}
                 className="w-1/3 h-full bg-[#FFFBF5]"
               />
-              
+
               {/* Panel 3 */}
               <motion.div
                 variants={panelVariants}
@@ -327,15 +353,16 @@ const topLine = {
               <motion.nav className="w-full">
                 <motion.ul className="space-y-6">
                   {navLinks.map((link, i) => (
-                    <motion.li 
-                      key={link.path} 
-                      variants={linkVariants}
-                    >
+                    <motion.li key={link.path} variants={linkVariants}>
                       <Link
                         ref={i === 0 ? firstLinkRef : undefined}
                         to={link.path}
                         onClick={() => setOpen(false)}
-                        className="block text-[#0A1A2F] font-[primary] text-[2.5rem] sm:text-[3.8rem] md:text-[4.6rem] uppercase leading-tight tracking-tight hover:opacity-60 transition-opacity"
+                        className={`block font-[primary] text-[2.5rem] sm:text-[3.8rem] md:text-[4.6rem] uppercase leading-tight tracking-tight transition-colors duration-300 ${
+                          location.pathname === link.path
+                            ? "text-[#C04000]"
+                            : "text-[#0A1A2F] hover:opacity-60"
+                        }`}
                         style={{ WebkitTapHighlightColor: "transparent" }}
                       >
                         {link.label}

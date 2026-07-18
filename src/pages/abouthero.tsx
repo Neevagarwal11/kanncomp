@@ -14,7 +14,7 @@ function abouthero() {
       {/* Text */}
       <div className="hero-content relative z-10 gap-12  flex items-center flex-col container-custom xs:-bottom-32 -bottom-52 lg:-bottom-46 w-[90vw]  text-[#FFFBF5]">
         <h1 className="text-hero font-[primary] text-4xl  lg:text-6xl mb-6  text-center tracking-tighter uppercase slide-up">
-          Designing resilient <br /> metal systems that support <br /> a better tomorrow.
+         Precision engineering <br/> for elevators that <br/> stand the test of time.
         </h1>
         <div className="flex justify-center flex-col h-[15vh]  lg:flex-row items-center">
           <div className="max-w-[80vw] flex flex-row gap-8 lg:max-w-[35vw] lg:px-4 px-0 tracking-tighter">

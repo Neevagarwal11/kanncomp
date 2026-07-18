@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import drilling from '../assets/drilling.jpg'
 import welding from '../assets/welding2.jpg'
 import Contact from '../components/contact'
+import { motion } from "framer-motion";
 function Infra() {
   function createData(
     name: string,
@@ -17,7 +18,8 @@ function Infra() {
   ) {
     return { name, calories, fat, carbs };
   }
-
+const EASE = [0.16, 1, 0.3, 1];
+const LOADER_DELAY = 2;
   const rows = [
     createData("Press Capacity", "Heavy-duty forming", "Medium-duty forming", "Light-duty forming"),
     createData("MS Thickness Range", "Up to 10 mm", "Up to 6 mm", "Up to 3 mm"),
@@ -43,9 +45,58 @@ function Infra() {
   return (
     <div className="bg-[#FFFBF5] flex flex-col gap-12">
       <div className="heading h-[25vh] lg:h-[35vh] flex items-end pr-4 pl-4 lg:pl-10 ">
-        <h1 className="text-4xl lg:text-7xl border-b-1 lg:border-none lg:pb-0 pb-6 text-[#352E2E] uppercase font-[primary]">
-          Our Infrastructure
-        </h1>
+        <div>
+                      <div className="overflow-hidden">
+                        <motion.h1
+                          initial={{
+                            y: 150,
+                          }}
+                          animate={{
+                            y: 0,
+                          }}
+                          transition={{
+                            duration: 1,
+                            delay: LOADER_DELAY + 0.1,
+                            ease: EASE,
+                          }}
+                          className="
+                            text-[52px]
+                            lg:text-[64px]
+                            md:text-[90px]
+                            xl:text-[130px]
+                            font-[primary]
+                            text-[#352E2E]
+                            tracking-[-0.04em]
+                            leading-[0.88]
+                            uppercase
+                          "
+                        >
+                          Machinery
+                        </motion.h1>
+                      </div>
+        
+                      <motion.div
+                        initial={{
+                          scaleX: 0,
+                        }}
+                        animate={{
+                          scaleX: 1,
+                        }}
+                        transition={{
+                          duration: 1,
+                          delay: LOADER_DELAY + 0.4,
+                          ease: EASE,
+                        }}
+                        className="
+                          mt-8
+                          h-[3px]
+                          w-40
+                          origin-left
+                          rounded-full
+                          bg-[#C04000]
+                        "
+                      />
+                    </div>
       </div>
 
       <div className="machine-container  text-[#352E2E] flex w-full  flex-col lg:flex-row p-4 lg:p-10 gap-8">
@@ -55,7 +106,7 @@ function Infra() {
         </div>
 
         <div className="specs-contaier flex flex-col w-full lg:w-[50vw] p-4 gap-8">
-          <div className="heading text-7xl uppercase font-[primary]">
+          <div className="heading text-5xl lg:text-7xl uppercase font-[primary]">
             <h1>Power Press</h1>
           </div>
 
@@ -105,7 +156,7 @@ function Infra() {
         </div>
 
         <div className="specs-contaier flex flex-col w-full lg:w-[50vw] p-4 gap-8">
-          <div className="heading text-7xl text-[#352E2E] font-[primary] uppercase">
+          <div className="heading text-5xl lg:text-7xl text-[#352E2E] font-[primary] uppercase">
             <h1>Drilling</h1>
           </div>
 
@@ -155,7 +206,7 @@ function Infra() {
         </div>
 
         <div className="specs-contaier  flex flex-col w-full lg:w-[50vw] p-4 gap-12">
-          <div className="heading text-7xl text-[#352E2E] font-[primary] uppercase">
+          <div className="heading text-5xl lg:text-7xl text-[#352E2E] font-[primary] uppercase">
             <h1>CO2 Welding</h1>
           </div>
 

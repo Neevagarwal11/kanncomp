@@ -9,6 +9,7 @@ import { LoaderProvider, useLoader } from "./components/loader";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import kci from "./assets/kcilogo.png";
+import Products from './pages/products';
 
 function App() {
   useLenis();
@@ -35,6 +36,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/infrastructure" element={<Infra />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
         </Routes>

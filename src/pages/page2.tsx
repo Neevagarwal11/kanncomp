@@ -3,8 +3,12 @@ import { useRef, type JSX } from "react";
 import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
 import { Dot, MapPin } from "lucide-react";
 import iso from "../assets/iso-removebg-preview.png";
+import iso140012 from '../assets/ISO140012.png';
 import since from "../assets/since2010.png";
 import johnsonlogo from "../assets/Johnson-Lifts-LOGO-1024x576-removebg-preview.png";
+import koneLogo from '../assets/koneLogo.png';
+import otisLogo from '../assets/otisLogo.jpg';
+import ProductReveal from '../components/productReveal'
 
 export default function Page2(): JSX.Element {
   const ref = useRef<HTMLElement | null>(null);
@@ -30,8 +34,11 @@ export default function Page2(): JSX.Element {
 
           <div className="rightside gap-6 w-[60vw] h-full flex items-start justify-end pr-22 p-1 flex-row">
             <div>
-              <img src={iso} loading="lazy" alt="ISO Certification" className="w-[3vw]" />
+              <img src={iso} loading="lazy" alt="ISO Certification" className="w-[45vw]" />
             </div>
+            <div>
+            <img src={iso140012} alt="ISO Certification" className="lg:w-[4vw] md:w-[8vw] w-[12vw]" />
+          </div>
             <div>
               <img src={since} loading="lazy" alt="Since 2010" className="w-[3vw] scale-220 " />
             </div>
@@ -49,6 +56,9 @@ export default function Page2(): JSX.Element {
 
           <div className="johnsonimgcontainer flex items-center justify-center py-12">
             <img src={johnsonlogo} alt="Johnson logo" className="johnsonimg w-[20vw] max-w-[220px] object-contain" />
+          </div>
+          <div className="koneimgcontainer flex items-center justify-center py-12">
+            <img src={koneLogo} alt="Kone logo" className="koneimg w-[20vw] max-w-[220px] object-contain" />
           </div>
 
           <div className="clientpara px-6 py-8 max-w-3xl mx-auto">
@@ -80,22 +90,25 @@ export default function Page2(): JSX.Element {
   const smoothParaOpacity = useSpring(paraOpacity, { stiffness: 150, damping: 25 });
 
   return (
-    <section ref={ref} className="h-screen bg-[#FFFBF5]">
+    <section ref={ref} className=" bg-[#FFFBF5]">
       {/* top header */}
-      <div className="w-full h-[10vh]  flex flex-col gap-2 lg:flex-row justify-between">
-        <div className="leftside lg:h-full h-[20%] w-full justify-center lg:w-[20vw] flex p-1 lg:p-4  lg:justify-center flex-row ">
+      <div className="w-full h-[12vh] flex flex-col gap-2 lg:flex-row justify-between items-center">
+        <div className="leftside lg:h-full h-[20%] w-full items-center justify-center lg:w-[20vw] flex p-1 lg:p-4  lg:justify-center flex-row ">
           <Dot className="animate-pulse" size={30} color="black" />
           <p>Featured</p>
         </div>
 
-        <div className="rightside gap-2 lg:gap-6 w-full lg:w-[60vw] h-[80%] lg:h-full  flex items-center justify-center lg:items-start  lg:justify-end lg:pr-22 lg:py-3 flex-row">
+        <div className="rightside gap-2 lg:gap-6 w-full lg:w-[60vw] h-[80%] lg:h-full  flex items-start justify-center lg:items-start  lg:justify-end lg:pr-22 lg:py-1 flex-row">
           <div>
-            <img src={iso} alt="ISO Certification" className="lg:w-[3vw] md:w-[8vw] w-[12vw]" />
+            <img src={iso} alt="ISO Certification" className="lg:w-[5vw] md:w-[8vw] w-[15vw]" />
           </div>
           <div>
-            <img src={since} alt="Since 2010" className="w-[12vw] lg:w-[3vw] md:w-[8vw] scale-220 " />
+            <img src={iso140012} alt="ISO Certification" className="lg:w-[5vw] md:w-[8vw] w-[15vw]" />
           </div>
-          <div className="flex gap-1 lg:gap-2  p-3 font-[secondary] items-center">
+          <div>
+            <img src={since} alt="Since 2010" className="w-[15vw] lg:w-[5vw] md:w-[8vw] scale-220 " />
+          </div>
+          <div className="flex gap-1 lg:gap-2  p-0 font-[secondary] h-full items-center">
             <MapPin className="scale-80" />
             <p className="text-xs">Sri Krishna Nagar,Madhavaram</p>
           </div>
@@ -103,14 +116,14 @@ export default function Page2(): JSX.Element {
       </div>
 
       {/* content */}
-      <div className="w-full  flex flex-col">
+      <div className="w-full  flex flex-col mb-12 p-2">
         <div className="text-4xl lg:text-6xl uppercase flex font-medium items-center justify-center h-[20vh] font-[primary]">
           Trusted by
         </div>
 
         {/* IMAGE: bind style to motion values (top -> down with scrub) */}
         <motion.div
-          className="johnsonimgcontainer  flex items-center justify-center will-change-transform"
+          className="customersContainer flex-col lg:flex-row flex items-center gap-10 justify-center will-change-transform"
           style={{ y: smoothImageY, opacity: smoothImageOpacity }}
         >
           <motion.img
@@ -121,20 +134,37 @@ export default function Page2(): JSX.Element {
             whileHover={{ scale: 1.03 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
           />
+          <motion.img
+            src={koneLogo}
+            alt="Kone logo"
+            className="koneimg  lg:w-[20vw] max-w-[220px] object-contain"
+            // subtle hover microinteraction (does not fight scroll-driven style)
+            whileHover={{ scale: 1.03 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          />
+          <motion.img
+            src={otisLogo}
+            alt="Otis logo"
+            className="otisimg  lg:w-[10vw] max-w-[220px] object-contain"
+            // subtle hover microinteraction (does not fight scroll-driven style)
+            whileHover={{ scale: 1.03 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          />
         </motion.div>
 
         {/* PARAGRAPH: opposite direction (bottom -> up) */}
         <motion.div
-          className="clientpara px-4 lg:px-6 max-w-3xl mx-auto will-change-transform"
+          className="clientpara px-2 lg:px-6 max-w-3xl mx-auto will-change-transform"
           style={{ y: smoothParaY, opacity: smoothParaOpacity }}
         >
-          <p className="text-base text-slate-700 text-center px-8 leading-7">
-            We partner with leading engineering and construction firms to deliver high-precision,
-            durable steel structures. Our approach blends modern fabrication techniques with
+          <p className="text-base text-slate-700 text-center py-8 px-8 leading-7">
+            We partner with leading elevator manufacturers to deliver high-precision,
+            durable sheet metal structures. Our approach blends modern fabrication techniques with
             time-tested engineering to ensure projects are delivered on schedule and built to last.
           </p>
         </motion.div>
       </div>
+
     </section>
   );
 }

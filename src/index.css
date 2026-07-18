@@ -23,6 +23,15 @@
 
 
 /* Lenis */
+/* Chrome */
+.scrollbar-none::-webkit-scrollbar {
+    display: none;
+}
+
+/* Firefox */
+.scrollbar-none {
+    scrollbar-width: none;
+}
 html.lenis {
   height: auto;
 }
