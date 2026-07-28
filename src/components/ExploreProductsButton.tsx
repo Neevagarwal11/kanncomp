@@ -6,19 +6,16 @@ const EASE = [0.16, 1, 0.3, 1];
 
 export default function ExploreProductsButton() {
   const navigate = useNavigate();
-const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
-useEffect(() => {
-  const coarse =
-    window.matchMedia &&
-    window.matchMedia("(pointer: coarse)").matches;
+  useEffect(() => {
+    const coarse =
+      window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
 
-  const touch =
-    "ontouchstart" in window ||
-    navigator.maxTouchPoints > 0;
+    const touch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
-  setIsTouchDevice(coarse || touch);
-}, []);
+    setIsTouchDevice(coarse || touch);
+  }, []);
 
   return (
     <motion.div
@@ -37,6 +34,7 @@ useEffect(() => {
         whileHover="hover"
         whileTap={{ scale: 0.98 }}
         className="
+        cursor-pointer
 group
 relative
 overflow-hidden
@@ -101,16 +99,18 @@ sm:py-5
           "
         />
 
-        <div className="
+        <div
+          className="
 relative
 z-20
 flex
 items-center
 justify-between
 gap-4
-sm:gap-8
-">
 
+sm:gap-8
+"
+        >
           <motion.div
             variants={{
               hover: {
@@ -118,7 +118,7 @@ sm:gap-8
               },
             }}
             transition={{
-              duration: .4,
+              duration: 0.4,
               ease: EASE,
             }}
           >
@@ -167,7 +167,7 @@ lg:text-2xl
               },
             }}
             transition={{
-              duration: .45,
+              duration: 0.45,
               ease: EASE,
             }}
             className="
@@ -198,7 +198,6 @@ flex-shrink-0
               size={24}
             />
           </motion.div>
-
         </div>
       </motion.button>
     </motion.div>
