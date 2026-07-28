@@ -3,12 +3,12 @@ import { useRef, type JSX } from "react";
 import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
 import { Dot, MapPin } from "lucide-react";
 import iso from "../assets/iso-removebg-preview.png";
-import iso140012 from '../assets/ISO140012.png';
+import iso140012 from '../assets/iso140012.png';
 import since from "../assets/since2010.png";
 import johnsonlogo from "../assets/Johnson-Lifts-LOGO-1024x576-removebg-preview.png";
 import koneLogo from '../assets/koneLogo.png';
 import otisLogo from '../assets/otisLogo.jpg';
-import ProductReveal from '../components/productReveal'
+
 
 export default function Page2(): JSX.Element {
   const ref = useRef<HTMLElement | null>(null);
